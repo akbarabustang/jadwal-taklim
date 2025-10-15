@@ -84,45 +84,81 @@
 - `Admin/Schedules/Edit.vue` - Edit schedule form
 - `LoadingIndicator.vue` - Modern loading component
 
-### Phase 3: Future Enhancements 🔮 (Planned)
+### Phase 3: PWA & Advanced Features 🔮 (Planned)
 
-**Proposed Features:**
+**Priority 1: Progressive Web App (PWA)**
 
-1. **Mosque Management**
+1. **PWA Implementation**
+   - Create Web App Manifest (manifest.json)
+     - App name, description, icons
+     - Theme colors (orange/green palette)
+     - Display mode (standalone)
+     - Start URL configuration
+   - Service Worker setup
+     - Offline functionality
+     - Cache strategy for assets and pages
+     - Background sync for data
+   - App Icons
+     - Multiple sizes: 192x192, 512x512
+     - Maskable icon support
+     - iOS/Android compatibility
+   - Install Prompts
+     - Add to home screen functionality
+     - Custom install UI
+   - Push Notifications
+     - New jadwal alerts
+     - Schedule reminders
+     - Admin notifications
+   - HTTPS Configuration
+     - SSL certificate setup for production
+   - **Tools**: laravel-pwa package or Vite PWA plugin
+
+**Priority 2: Data Management**
+
+2. **Mosque Management**
    - Register new mosques
    - Edit mosque information
    - Mosque verification system
    - Associate schedules with mosques
+   - Google Maps integration
 
-2. **Ustadz/Speaker Management**
-   - Add ustadz profiles
+3. **Ustadz/Speaker Management**
+   - Add ustadz profiles with photos
    - Edit ustadz information
    - Link ustadz to schedules
    - Track ustadz schedules
+   - Ustadz detail pages
 
-3. **Category Management**
+4. **Category Management**
    - Add/edit kajian categories
    - Assign icons/colors to categories
+   - Category hierarchy
 
-4. **User Management**
+**Priority 3: Administration**
+
+5. **User Management**
    - Multi-admin user management
    - Activity logs
    - Permission management
+   - Role-based access control (super admin, moderator)
 
-5. **Notifications**
+6. **Notifications**
    - Email notifications for new schedules
    - Schedule reminder system
    - Admin notifications for pending approvals
+   - Push notifications via PWA
 
-6. **Content Management**
+7. **Content Management**
    - Manage static pages (About, Contact, etc.)
    - FAQ management
    - Announcement banners
+   - Blog/news section
 
-7. **Import/Export**
+8. **Import/Export**
    - CSV/Excel import for bulk schedule creation
    - Export schedule data
    - Backup functionality
+   - Schedule templates
 
 ## 🏗 Architecture
 
@@ -326,8 +362,9 @@
 ---
 
 **Last Updated**: October 15, 2025  
-**Current Phase**: Phase 2 (Admin Panel) - COMPLETED  
-**Next Milestone**: Phase 3 (Future Enhancements)
+**Current Phase**: Phase 2 (Admin Panel) - IN PROGRESS (Enhancement Phase)  
+**Next Milestone**: Phase 3 (PWA & Advanced Features)  
+**Repository**: https://github.com/akbarabustang/jadwal-taklim
 
 ## 🔑 Quick Start for Admins
 
