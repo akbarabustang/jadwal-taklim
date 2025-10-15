@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
     show: {
@@ -82,6 +82,13 @@ const props = defineProps({
 const emit = defineEmits(['close', 'confirm']);
 
 const processing = ref(false);
+
+// Reset processing state when modal is closed
+watch(() => props.show, (newValue) => {
+    if (!newValue) {
+        processing.value = false;
+    }
+});
 
 const close = () => {
     if (!processing.value) {
