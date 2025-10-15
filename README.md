@@ -1,30 +1,114 @@
 # Jadwal Taklim
 
-Platform untuk menemukan jadwal kajian dan taklim di masjid-masjid sekitar Anda.
+<div align="center">
 
-## 🎯 Features
+**Platform untuk menemukan jadwal kajian dan taklim di masjid-masjid sekitar Anda.**
 
-### Phase 1: Public Frontend (Current)
-- **Homepage**: Menampilkan upcoming jadwal taklim dengan informasi lengkap (nama ustadz, jadwal, lokasi masjid, judul kajian, dll)
-- **Jadwal Lengkap**: Halaman tabel yang menampilkan semua jadwal taklim dengan fitur:
-  - Filter berdasarkan kategori kajian (Tafsir, Hadits, Fiqih, Akhlaq, dll)
-  - Filter berdasarkan kota
-  - Pencarian berdasarkan judul, nama ustadz, atau nama masjid
-  - Pagination untuk navigasi yang mudah
-- **SEO Optimized**: Meta tags, Open Graph, dan Twitter Cards untuk share yang lebih baik
-- **Responsive Design**: Tampilan optimal di desktop, tablet, dan mobile
+[![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat&logo=laravel)](https://laravel.com)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3-4FC08D?style=flat&logo=vue.js)](https://vuejs.org)
+[![Inertia.js](https://img.shields.io/badge/Inertia.js-Latest-9553E9?style=flat)](https://inertiajs.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com)
 
-### Phase 2: Admin Panel (Completed)
-- **Authentication System**: Login/Logout dengan Laravel Breeze
-- **Admin Dashboard**: Statistics dan overview data
-- **Schedule Management**: Full CRUD operations untuk jadwal taklim
-  - Create: Tambah jadwal baru dengan form lengkap
-  - Read: Tabel jadwal dengan search dan filter
-  - Update: Edit jadwal yang sudah ada
-  - Delete: Hapus jadwal dengan confirmation
-- **Admin Middleware**: Route protection untuk keamanan
-- **Flash Messages**: Success/error notifications
-- **Responsive Admin UI**: Green-themed admin interface
+**[Demo](#) • [Documentation](PROJECT_CONTEXT.md) • [Report Bug](https://github.com/akbarabustang/jadwal-taklim/issues) • [Request Feature](https://github.com/akbarabustang/jadwal-taklim/issues)**
+
+---
+
+### ⭐ If you find this project useful, please consider giving it a star! ⭐
+
+**Created with ❤️ by [Akbar Abustang](https://github.com/akbarabustang)**
+
+---
+
+</div>
+
+## ✨ Features
+
+### 🌐 Public Features
+
+**Homepage**
+- Display upcoming jadwal taklim with complete information
+- Ustadz name, schedule, mosque location, kajian title
+- Card-based modern design
+- Quick access to all schedules
+
+**Complete Schedule Page**
+- Comprehensive table view of all schedules
+- Advanced filtering:
+  - Filter by kajian category (Tafsir, Hadits, Fiqih, Akhlaq, etc.)
+  - Filter by city/location
+  - Real-time search by title, ustadz name, or mosque name
+- Pagination for easy navigation
+- Active filter badges
+- Clear filter functionality
+
+**Ustadz Profile Pages**
+- Dedicated pages for each ustadz
+- List of all schedules by ustadz
+- Contact information
+
+**SEO & Performance**
+- Meta descriptions and keywords
+- Open Graph tags for social media sharing
+- Twitter Card support
+- Server-side rendering with Inertia.js
+- Dynamic page titles
+- Responsive design (mobile, tablet, desktop)
+
+### 🔐 Admin Panel Features
+
+**Authentication & Security**
+- Secure login/logout system (Laravel Breeze)
+- Admin middleware for route protection
+- Role-based access control (is_admin flag)
+- Password visibility toggle
+- Session management
+- CSRF protection
+
+**Admin Dashboard**
+- Real-time statistics:
+  - Total schedules count
+  - Active schedules
+  - Upcoming schedules
+  - Category distribution
+- Recent schedules overview
+- Category statistics with progress bars
+- Quick action buttons
+- Modern green-themed UI
+
+**Schedule Management (CRUD)**
+- **Create**: Add new schedules with comprehensive form
+  - Schedule details (title, description)
+  - Ustadz information
+  - Mosque details (name, address, city)
+  - Date and time selection
+  - Frequency (once, daily, weekly, monthly)
+  - Category selection
+  - Contact information
+  - Active/inactive status
+- **Read**: View all schedules with:
+  - Search functionality
+  - Status filter (active/inactive)
+  - Sortable columns
+  - Pagination
+- **Update**: Edit existing schedules
+  - Pre-filled form data
+  - Validation on update
+- **Delete**: Remove schedules
+  - Modern confirmation modal
+  - Soft delete protection
+
+**User Experience**
+- Flash messages for success/error feedback
+- Loading indicators with blur overlay
+- Page transition animations
+- Responsive admin interface
+- Breadcrumb navigation
+- Intuitive layout
+
+**Error Pages**
+- Custom 404 (Page Not Found)
+- Custom 403 (Access Denied)
+- Modern design matching app theme
 
 ## 🛠 Tech Stack
 
@@ -291,6 +375,44 @@ jadwal-taklim/
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 Roadmap
+
+For detailed project roadmap and development phases, please refer to [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).
+
+**Upcoming Features:**
+- Progressive Web App (PWA) implementation
+- Mosque management system
+- Ustadz profile management
+- Push notifications
+- And more!
+
+## 👨‍💻 Author
+
+**Akbar Abustang**
+- GitHub: [@akbarabustang](https://github.com/akbarabustang)
+- Repository: [jadwal-taklim](https://github.com/akbarabustang/jadwal-taklim)
+
+### ⭐ Show Your Support
+
+If this project helped you, please give it a ⭐️! It motivates me to continue improving and maintaining this project.
+
 ## 📄 License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+<div align="center">
+
+**Made with ❤️ by Akbar Abustang**
+
+[![GitHub stars](https://img.shields.io/github/stars/akbarabustang/jadwal-taklim?style=social)](https://github.com/akbarabustang/jadwal-taklim/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/akbarabustang/jadwal-taklim?style=social)](https://github.com/akbarabustang/jadwal-taklim/network/members)
+
+</div>
