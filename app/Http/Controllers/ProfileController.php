@@ -51,6 +51,15 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        // Prevent deletion if this is the last admin
+        if ($user->is_admin) {
+            $adminCount = \App\Models\User::where('is_admin', true)->count();
+            
+            if ($adminCount <= 1) {
+                return Redirect::route('profile.edit')->with('error', 'Tidak dapat menghapus akun. Anda adalah satu-satunya admin yang tersisa.');
+            }
+        }
+
         Auth::logout();
 
         $user->delete();
