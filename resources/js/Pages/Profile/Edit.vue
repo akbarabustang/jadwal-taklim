@@ -1,9 +1,11 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
 
 defineProps({
     mustVerifyEmail: {
@@ -16,41 +18,53 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Profile" />
+    <Head title="Profil" />
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
-            >
-                Profile
-            </h2>
-        </template>
+    <AdminLayout>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="mb-6">
+                <h1 class="text-3xl font-bold text-gray-900">Profil Pengguna</h1>
+                <p class="text-gray-600 mt-1">Kelola informasi profil dan keamanan akun Anda</p>
+            </div>
 
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800"
-                >
-                    <UpdateProfileInformationForm
-                        :must-verify-email="mustVerifyEmail"
-                        :status="status"
-                        class="max-w-xl"
-                    />
+            <div class="space-y-6">
+                <!-- Profile Information Card -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Informasi Profil</h2>
+                        <p class="text-sm text-gray-600 mt-1">Perbarui informasi profil dan alamat email Anda</p>
+                    </div>
+                    <div class="p-6">
+                        <UpdateProfileInformationForm
+                            :must-verify-email="mustVerifyEmail"
+                            :status="status"
+                        />
+                    </div>
                 </div>
 
-                <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800"
-                >
-                    <UpdatePasswordForm class="max-w-xl" />
+                <!-- Update Password Card -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Perbarui Password</h2>
+                        <p class="text-sm text-gray-600 mt-1">Pastikan menggunakan password yang kuat dan aman</p>
+                    </div>
+                    <div class="p-6">
+                        <UpdatePasswordForm />
+                    </div>
                 </div>
 
-                <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800"
-                >
-                    <DeleteUserForm class="max-w-xl" />
+                <!-- Delete Account Card -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Hapus Akun</h2>
+                        <p class="text-sm text-gray-600 mt-1">Hapus akun Anda secara permanen</p>
+                    </div>
+                    <div class="p-6">
+                        <DeleteUserForm />
+                    </div>
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </AdminLayout>
 </template>

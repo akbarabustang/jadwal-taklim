@@ -35,73 +35,69 @@ const updatePassword = () => {
 
 <template>
     <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Update Password
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Ensure your account is using a long, random password to stay
-                secure.
-            </p>
-        </header>
-
-        <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
+        <form @submit.prevent="updatePassword" class="space-y-6">
             <div>
-                <InputLabel for="current_password" value="Current Password" />
-
-                <TextInput
+                <label for="current_password" class="block text-sm font-medium text-gray-700 mb-2">
+                    Password Saat Ini
+                </label>
+                <input
                     id="current_password"
                     ref="currentPasswordInput"
                     v-model="form.current_password"
                     type="password"
-                    class="mt-1 block w-full"
                     autocomplete="current-password"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                    :class="{ 'border-red-500': form.errors.current_password }"
                 />
-
-                <InputError
-                    :message="form.errors.current_password"
-                    class="mt-2"
-                />
+                <p v-if="form.errors.current_password" class="mt-2 text-sm text-red-600">{{ form.errors.current_password }}</p>
             </div>
 
             <div>
-                <InputLabel for="password" value="New Password" />
-
-                <TextInput
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                    Password Baru
+                </label>
+                <input
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
                     autocomplete="new-password"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                    :class="{ 'border-red-500': form.errors.password }"
                 />
-
-                <InputError :message="form.errors.password" class="mt-2" />
+                <p v-if="form.errors.password" class="mt-2 text-sm text-red-600">{{ form.errors.password }}</p>
             </div>
 
             <div>
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
-
-                <TextInput
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
+                    Konfirmasi Password Baru
+                </label>
+                <input
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
                     autocomplete="new-password"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                    :class="{ 'border-red-500': form.errors.password_confirmation }"
                 />
-
-                <InputError
-                    :message="form.errors.password_confirmation"
-                    class="mt-2"
-                />
+                <p v-if="form.errors.password_confirmation" class="mt-2 text-sm text-red-600">{{ form.errors.password_confirmation }}</p>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <button
+                    type="submit"
+                    :disabled="form.processing"
+                    class="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                >
+                    <span v-if="!form.processing">Perbarui Password</span>
+                    <span v-else class="flex items-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Memperbarui...
+                    </span>
+                </button>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -111,9 +107,12 @@ const updatePassword = () => {
                 >
                     <p
                         v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600 dark:text-gray-400"
+                        class="text-sm font-medium text-green-600 flex items-center"
                     >
-                        Saved.
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Password berhasil diperbarui!
                     </p>
                 </Transition>
             </div>

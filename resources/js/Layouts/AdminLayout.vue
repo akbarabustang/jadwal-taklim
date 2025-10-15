@@ -95,27 +95,73 @@
         </nav>
 
         <!-- Flash Messages -->
-        <div v-if="$page.props.flash.success" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-            <div class="bg-primary-50 border-l-4 border-primary-600 p-4 rounded">
-                <div class="flex">
-                    <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p class="text-primary-800">{{ $page.props.flash.success }}</p>
+        <Transition
+            enter-active-class="transform ease-out duration-300 transition"
+            enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+            leave-active-class="transition ease-in duration-200"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+        >
+            <div v-if="showSuccessMessage" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                <div class="bg-green-50 border-l-4 border-green-600 p-4 rounded-lg shadow-lg animate-pulse-once">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-green-800">{{ $page.props.flash.success }}</p>
+                            </div>
+                        </div>
+                        <button
+                            @click="dismissSuccess"
+                            class="ml-4 inline-flex text-green-600 hover:text-green-800 focus:outline-none"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Transition>
 
-        <div v-if="$page.props.flash.error" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-            <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded">
-                <div class="flex">
-                    <svg class="w-5 h-5 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p class="text-red-800">{{ $page.props.flash.error }}</p>
+        <Transition
+            enter-active-class="transform ease-out duration-300 transition"
+            enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+            leave-active-class="transition ease-in duration-200"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+        >
+            <div v-if="showErrorMessage" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-lg shadow-lg animate-shake">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-red-800">{{ $page.props.flash.error }}</p>
+                            </div>
+                        </div>
+                        <button
+                            @click="dismissError"
+                            class="ml-4 inline-flex text-red-600 hover:text-red-800 focus:outline-none"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Transition>
 
         <!-- Page Content -->
         <main class="py-8">
@@ -125,8 +171,43 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { ref, computed, watch } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+const showSuccessMessage = ref(false);
+const showErrorMessage = ref(false);
+
+// Watch for flash messages
+watch(() => page.props.flash, (flash) => {
+    if (flash.success) {
+        showSuccessMessage.value = true;
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Auto dismiss after 5 seconds
+        setTimeout(() => {
+            showSuccessMessage.value = false;
+        }, 5000);
+    }
+    
+    if (flash.error) {
+        showErrorMessage.value = true;
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Auto dismiss after 8 seconds (errors should stay longer)
+        setTimeout(() => {
+            showErrorMessage.value = false;
+        }, 8000);
+    }
+}, { deep: true, immediate: true });
+
+const dismissSuccess = () => {
+    showSuccessMessage.value = false;
+};
+
+const dismissError = () => {
+    showErrorMessage.value = false;
+};
 
 const showDropdown = ref(false);
 
@@ -134,3 +215,34 @@ const userInitial = computed(() => {
     return window.Laravel?.user?.name?.charAt(0).toUpperCase() || 'A';
 });
 </script>
+
+<style scoped>
+@keyframes pulse-once {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.animate-pulse-once {
+    animation: pulse-once 0.6s ease-in-out;
+}
+
+.animate-shake {
+    animation: shake 0.5s ease-in-out;
+}
+</style>
